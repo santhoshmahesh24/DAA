@@ -1,0 +1,148 @@
+import time
+
+import random
+
+import matplotlib.pyplot as plt
+
+ 
+
+# Linear Search Function
+
+def linear_search(arr, key):
+
+    for i in range(len(arr)):
+
+        if arr[i] == key:
+
+            return i
+
+    return -1
+
+ 
+
+# Number of test cases
+
+count = int(input("Enter how many n values you want to test: "))
+
+ 
+
+n_values = []
+
+times = []
+
+ 
+
+# Input n values
+
+for i in range(count):
+
+    n = int(input(f"\nEnter n value {i + 1}: "))
+
+    n_values.append(n)
+
+ 
+
+print("\n================ LINEAR SEARCH EXECUTION ================\n")
+
+ 
+
+# Table Heading
+
+print("{:<10} {:<20} {:<20}".format("N", "Search Element", "Time Taken (ms)"))
+
+print("-" * 55)
+
+ 
+
+# Process each n value
+
+for n in n_values:
+
+ 
+
+    # Generate random array
+
+    arr = [random.randint(1, 100) for _ in range(n)]
+
+ 
+
+    print(f"\nGenerated Array for n = {n}:")
+
+    print(arr)
+
+ 
+
+    # Get search element from user
+
+    key = int(input(f"\nEnter the element to search in array of size {n}: "))
+
+ 
+
+    # Start time
+
+    start_time = time.perf_counter()
+
+ 
+
+    # Perform linear search
+
+    position = linear_search(arr, key)
+
+ 
+
+    # End time
+
+    end_time = time.perf_counter()
+
+ 
+
+    # Calculate time in milliseconds
+
+    time_taken = (end_time - start_time) * 1000
+
+ 
+
+    times.append(time_taken)
+
+ 
+
+    # Display search result
+
+    if position != -1:
+
+        print(f"Element {key} found at position {position}")
+
+    else:
+
+        print(f"Element {key} not found")
+
+ 
+
+    # Display table row
+
+    print("{:<10} {:<20} {:<20.6f}".format(n, key, time_taken))
+
+ 
+
+# Plot Graph
+
+plt.figure(figsize=(8, 5))
+
+ 
+
+plt.plot(n_values, times, marker='o')
+
+ 
+
+plt.title("Linear Search Time Complexity")
+
+plt.xlabel("Number of Elements (n)")
+
+plt.ylabel("Time Taken (milliseconds)")
+
+plt.grid(True)
+
+ 
+
+plt.show()
+
